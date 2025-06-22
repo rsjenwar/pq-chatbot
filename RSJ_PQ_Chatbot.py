@@ -22,7 +22,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.llms import Ollama
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 from langchain.document_loaders.sitemap import SitemapLoader
 import hashlib
 import logging
@@ -220,11 +220,11 @@ def submit_feedback(feedback):
 
 
 async def create_persist_db(docs, embedding, dir):
-    vector_dB = await Chroma.from_documents(documents=docs,
+    vector_dB = Chroma.from_documents(documents=docs,
                                            embedding=embedding,
                                            persist_directory=dir)
     # time.sleep(15)
-    await vector_dB.persist()
+    vector_dB.persist()
     return vector_dB
 
 
@@ -250,9 +250,9 @@ def RSJ_PQ_Chatbot():
             # text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
             all_splits = text_splitter.split_documents(pdf_docs)
             logging.debug("[RSJ | DEBUG] All documents splitted into %d chunks with chunk size %d and chunk_overlap %d", len(all_splits), chunk_size, chunk_overlap)
-            vectordb = asyncio.run(create_persist_db(all_splits,
+            vectordb = create_persist_db(all_splits,
                                          HuggingFaceEmbeddings(),
-                                         MD5hash_pdf_persits_dir))
+                                         MD5hash_pdf_persits_dir)
             vectordb = None
             # time.sleep(15)
             logging.debug("[RSJ | DEBUG] Created Document folder Vector Store %s %s",
