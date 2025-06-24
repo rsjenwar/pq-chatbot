@@ -11,4 +11,4 @@ pypdf
 watchdog
 streamlit-feedback
 langchain-openai
-pysqlite3-binary
+pysqlite3-binary>=0.5.2
