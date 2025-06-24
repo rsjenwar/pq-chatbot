@@ -227,9 +227,9 @@ def submit_feedback(feedback):
 async def create_persist_db(docs, embedding, dir):
     vector_dB = await Chroma.from_documents(documents=docs,
                                            embedding=embedding)
-                                          # persist_directory=dir)
+                                           persist_directory=dir)
     # time.sleep(15)
-    # vector_dB.persist()
+    vector_dB.persist()
     return vector_dB
 
 
@@ -242,9 +242,11 @@ def RSJ_PQ_Chatbot():
 
     if 'vector_db' not in st.session_state:
         MD5hash_pdf_persits_dir = os.path.join("data", hashlib.md5(pdf_folder_path.encode('utf-8')).hexdigest())
+        persist_directory = "/mnt/chroma" # This should match your Azure Files mount
+        MD5hash_pdf_persits_dir = persist_directory
         if os.path.exists(MD5hash_pdf_persits_dir):
             vectordb = Chroma(persist_directory=MD5hash_pdf_persits_dir,
-                                 embedding_function=HuggingFaceEmbeddings())
+                                 embedding_function=HuggingFaceEmbeddings(), persist_directory)
             logging.info("[RSJ | INFO] Loaded Vector Store from: %s  %s", MD5hash_pdf_persits_dir, pdf_folder_path)
         else:
             pdf_loader = PyPDFDirectoryLoader(pdf_folder_path)
@@ -258,12 +260,12 @@ def RSJ_PQ_Chatbot():
             vectordb = create_persist_db(all_splits,
                                          HuggingFaceEmbeddings(),
                                          MD5hash_pdf_persits_dir)
-            # vectordb = None
+            vectordb = None
             # time.sleep(15)
             logging.debug("[RSJ | DEBUG] Created Document folder Vector Store %s %s",
                           MD5hash_pdf_persits_dir, pdf_folder_path)
-            #vectordb = Chroma(persist_directory=MD5hash_pdf_persits_dir,
-            #                     embedding_function=HuggingFaceEmbeddings())
+            vectordb = Chroma(persist_directory=MD5hash_pdf_persits_dir,
+                                embedding_function=HuggingFaceEmbeddings())
             logging.debug("[RSJ | DEBUG] Loaded Vector Store from persistent directory %s", MD5hash_pdf_persits_dir)
         # assign in session state in first go itself
         st.session_state.vector_db = vectordb
