@@ -241,7 +241,7 @@ def RSJ_PQ_Chatbot():
     #pdf_folder_path="/Users/rsj/Documents/PQ_MEITY"
 
     if 'vector_db' not in st.session_state:
-        MD5hash_pdf_persits_dir = hashlib.md5(pdf_folder_path.encode('utf-8')).hexdigest()
+        MD5hash_pdf_persits_dir = os.path.join("data", hashlib.md5(pdf_folder_path.encode('utf-8')).hexdigest())
         if os.path.exists(MD5hash_pdf_persits_dir):
             vectordb = Chroma(persist_directory=MD5hash_pdf_persits_dir,
                                  embedding_function=HuggingFaceEmbeddings())
