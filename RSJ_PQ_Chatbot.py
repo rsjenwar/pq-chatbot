@@ -226,7 +226,7 @@ def submit_feedback(feedback):
 
 async def create_persist_db(docs, embedding, dir):
     vector_dB = await Chroma.from_documents(documents=docs,
-                                           embedding=embedding)
+                                           embedding=embedding,
                                            persist_directory=dir)
     # time.sleep(15)
     vector_dB.persist()
