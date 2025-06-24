@@ -1,4 +1,7 @@
 # (C) Rajeshwar Singh Jenwar rsjenwar@gmail.com 1-DEC-23
+__import__("pysqlite3")
+import sys
+sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
 import asyncio
 import time
 import os
@@ -34,9 +37,7 @@ from langchain.chains import RetrievalQA
 from PIL import Image
 from streamlit_feedback import streamlit_feedback
 from langchain_openai import AzureChatOpenAI
-#__import__("pysqlite3")
-#import sys
-#sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+
 
 
 # App page icon and title in the browser, MUST be first command of the app
