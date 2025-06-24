@@ -238,13 +238,12 @@ def RSJ_PQ_Chatbot():
     st.header("Parliament Questions Chatbot 💬:flag-in:")
     add_vertical_space(1)
     vector_db_initialized = 'false'
-    pdf_folder_path = "data/PQ_MEITY"
+    pdf_folder_path = "/mnt/chroma"
     #pdf_folder_path="/Users/rsj/Documents/PQ_MEITY"
 
     if 'vector_db' not in st.session_state:
-        MD5hash_pdf_persits_dir = os.path.join("data", hashlib.md5(pdf_folder_path.encode('utf-8')).hexdigest())
-        persist_directory = "/mnt/chroma" # This should match your Azure Files mount
-        MD5hash_pdf_persits_dir = persist_directory
+        MD5hash_pdf_persits_dir = os.path.join("pdf_folder_path", hashlib.md5(pdf_folder_path.encode('utf-8')).hexdigest())
+        print("rsj MD5hash_pdf_persits_dir", MD5hash_pdf_persits_dir)
         if os.path.exists(MD5hash_pdf_persits_dir):
             vectordb = Chroma(persist_directory=MD5hash_pdf_persits_dir,
                                  embedding_function=HuggingFaceEmbeddings())
