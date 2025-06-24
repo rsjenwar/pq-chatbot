@@ -246,7 +246,7 @@ def RSJ_PQ_Chatbot():
         MD5hash_pdf_persits_dir = persist_directory
         if os.path.exists(MD5hash_pdf_persits_dir):
             vectordb = Chroma(persist_directory=MD5hash_pdf_persits_dir,
-                                 embedding_function=HuggingFaceEmbeddings(), persist_directory)
+                                 embedding_function=HuggingFaceEmbeddings())
             logging.info("[RSJ | INFO] Loaded Vector Store from: %s  %s", MD5hash_pdf_persits_dir, pdf_folder_path)
         else:
             pdf_loader = PyPDFDirectoryLoader(pdf_folder_path)
