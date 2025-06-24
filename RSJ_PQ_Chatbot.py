@@ -230,6 +230,7 @@ async def create_persist_db(docs, embedding, dir):
                                            persist_directory=dir)
     # time.sleep(15)
     vector_dB.persist()
+    print(docs)
     return vector_dB
 
 
@@ -257,6 +258,7 @@ def RSJ_PQ_Chatbot():
             # text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
             all_splits = text_splitter.split_documents(pdf_docs)
             logging.debug("[RSJ | DEBUG] All documents splitted into %d chunks with chunk size %d and chunk_overlap %d", len(all_splits), chunk_size, chunk_overlap)
+            print("[RSJ | DEBUG] All documents splitted into %d chunks with chunk size %d and chunk_overlap %d", len(all_splits), chunk_size, chunk_overlap)
             vectordb = create_persist_db(all_splits,
                                          HuggingFaceEmbeddings(),
                                          MD5hash_pdf_persits_dir)
