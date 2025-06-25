@@ -238,11 +238,12 @@ def RSJ_PQ_Chatbot():
     st.header("Parliament Questions Chatbot 💬:flag-in:")
     add_vertical_space(1)
     vector_db_initialized = 'false'
-    pdf_folder_path = "/mnt/chroma"
+    pdf_folder_path = "data/PQ_MEITY"
+    mnt_path = "/mnt/chroma"
     #pdf_folder_path="/Users/rsj/Documents/PQ_MEITY"
 
     if 'vector_db' not in st.session_state:
-        MD5hash_pdf_persits_dir = os.path.join("pdf_folder_path", hashlib.md5(pdf_folder_path.encode('utf-8')).hexdigest())
+        MD5hash_pdf_persits_dir = os.path.join(mnt_path, hashlib.md5(pdf_folder_path.encode('utf-8')).hexdigest())
         print("rsj MD5hash_pdf_persits_dir", MD5hash_pdf_persits_dir)
         st.write("rsj MD5hash_pdf_persits_dir", MD5hash_pdf_persits_dir)
         if os.path.exists(MD5hash_pdf_persits_dir):
