@@ -244,8 +244,8 @@ def RSJ_PQ_Chatbot():
 
     if 'vector_db' not in st.session_state:
         MD5hash_pdf_persits_dir = os.path.join(mnt_path, hashlib.md5(pdf_folder_path.encode('utf-8')).hexdigest())
-        print("rsj MD5hash_pdf_persits_dir", MD5hash_pdf_persits_dir)
-        st.write("rsj MD5hash_pdf_persits_dir", MD5hash_pdf_persits_dir)
+        #print("rsj MD5hash_pdf_persits_dir", MD5hash_pdf_persits_dir)
+        #st.write("rsj MD5hash_pdf_persits_dir", MD5hash_pdf_persits_dir)
         if os.path.exists(MD5hash_pdf_persits_dir):
             vectordb = Chroma(persist_directory=MD5hash_pdf_persits_dir,
                                  embedding_function=HuggingFaceEmbeddings())
@@ -259,8 +259,8 @@ def RSJ_PQ_Chatbot():
             # text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
             all_splits = text_splitter.split_documents(pdf_docs)
             logging.debug("[RSJ | DEBUG] All documents splitted into %d chunks with chunk size %d and chunk_overlap %d", len(all_splits), chunk_size, chunk_overlap)
-            print("[RSJ | DEBUG] All documents splitted into %d chunks with chunk size %d and chunk_overlap %d", len(all_splits), chunk_size, chunk_overlap)
-            st.write("[RSJ | DEBUG] All documents splitted into %d chunks with chunk size %d and chunk_overlap %d", len(all_splits), chunk_size, chunk_overlap)
+            #print("[RSJ | DEBUG] All documents splitted into %d chunks with chunk size %d and chunk_overlap %d", len(all_splits), chunk_size, chunk_overlap)
+            #st.write("[RSJ | DEBUG] All documents splitted into %d chunks with chunk size %d and chunk_overlap %d", len(all_splits), chunk_size, chunk_overlap)
             vectordb = create_persist_db(all_splits,
                                          HuggingFaceEmbeddings(),
                                          MD5hash_pdf_persits_dir)
@@ -271,7 +271,7 @@ def RSJ_PQ_Chatbot():
             vectordb = Chroma(persist_directory=MD5hash_pdf_persits_dir,
                                 embedding_function=HuggingFaceEmbeddings())
             logging.debug("[RSJ | DEBUG] Loaded Vector Store from persistent directory %s", MD5hash_pdf_persits_dir)
-            st.write("[RSJ | DEBUG] Loaded Vector Store from persistent directory %s", MD5hash_pdf_persits_dir)
+            #st.write("[RSJ | DEBUG] Loaded Vector Store from persistent directory %s", MD5hash_pdf_persits_dir)
         # assign in session state in first go itself
         st.session_state.vector_db = vectordb
 
@@ -306,8 +306,8 @@ def RSJ_PQ_Chatbot():
                     temperature=0,
                     #max_tokens=512,
                 )
-                response = llm.invoke("What is weather in Delhi now?")
-                st.write(response)
+                #response = llm.invoke("What is weather in Delhi now?")
+                #st.write(response)
 
                 # llm = Ollama(model=LLM_MODEL,
                 #              verbose=True,
