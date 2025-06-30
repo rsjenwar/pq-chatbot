@@ -57,24 +57,24 @@ LLM_MODEL = "deepseek-r1"
 
 # Sidebar contents
 with st.sidebar:
-    st.title('🤗💬 Parliament Questions Chatbot')
+    st.title('🤗💬 Parliament Questions AI Agengt')
     st.markdown('''
     ## About
-    This Generative AI App can generate answers for parliament questions based on answers to similar questions given in past by the Ministry of Electronics and IT (MEITY), Government of India. The AI Engine is trained on both Lok Sabha and Rajya Sabha question-answer pairs pertaining to MEITY, from year 2014 onwards. 
+    This Generative AI App can generate answers for parliament questions based on answers to similar questions given in past by the Ministry of Electronics and IT (MEITY), Government of India. The AI Engine is trained on both Lok Sabha and Rajya Sabha question-answer pairs pertaining to MEITY, from year 2014 onwards till last session. 
     
     ''')
     add_vertical_space(3)
-    st.markdown('''
-    ## Large Language Model (LLM)
-    ''')
-    LLM_MODEL = st.sidebar.selectbox("Select your preferred LLM",
-                                     list(LLM_MODELS))
-    if LLM_MODEL == "llama2":
-        LLM_MODEL = "ParlGPTllama2"
+   #  st.markdown('''
+   # ## Large Language Model (LLM)
+   # ''')
+# LLM_MODEL = st.sidebar.selectbox("Select your preferred LLM",
+  #                                   list(LLM_MODELS))
+   # if LLM_MODEL == "llama2":
+    #    LLM_MODEL = "ParlGPTllama2"
     st.markdown('''
     ## Technologies
     This Generative AI App is built using following purely open, secure and free technologies:
-    - [LLAMA2](https://platform.openai.com/docs/models) LLM model
+    - [LLAMA4](https://www.llama.com/models/llama-4/) Large Language Model (LLM)
     - [LangChain](https://python.langchain.com/)
     ''')
     add_vertical_space(3)
