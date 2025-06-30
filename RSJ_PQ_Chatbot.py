@@ -135,6 +135,15 @@ def wrap_text_preserve_newlines(text, width=110):
 import re
 def remove_prefix(string, prefix):
     return re.sub(f'^{prefix}', '', string)
+
+def extract_pq_number(file_name):
+    # Pattern: 'AU' or 'AS', then digits, then either '_' or '.pdf'
+    match = re.search(r'(?:AU|AS)(\d+)(?:_|\.pdf)', file_name, re.IGNORECASE)
+    if match:
+        return match.group(1)  # The number as a string
+    else:
+        return None
+
 def print_parl_question_references(llm_response):
     n = 0
     pages = None
@@ -146,7 +155,7 @@ def print_parl_question_references(llm_response):
         file_name = str(source.metadata['source'])
         parl = "Lok Sabha" if (file_name.__contains__("_loksabhaquestions_")) else "Rajya Sabha"
         question_type = "Unstarred" if (file_name.__contains__("_AU")) else "Starred ⭐"
-        question_no = re.findall(r'\d+\.pdf', file_name)
+        question_no = extract_pq_number(file_name)
         question_no_star = "⭐" if(question_type.__contains__("Starred")) else ""
         date = re.search(r'TO BE ANSWERED ON:? \d{1,2}.\d{1,2}.\d{4}', source.page_content)
         logging.debug("[RSJ | DEBUG] \n date: %s", {date})
@@ -180,7 +189,7 @@ def print_parl_question_references(llm_response):
             question_title = question_title.strip()
         col1, col2 = st.columns([0.7, 0.3])
         with col1:
-            st.write(f"\t [{n}]: Question Title: {question_title}, {parl}, {question_type}, Question No.: {question_no_star}{question_no[0].removesuffix('.pdf')}, Dated: {dated}")
+            st.write(f"\t [{n}]: Question Title: {question_title}, {parl}, {question_type}, Question No.: {question_no_star}{question_no}, Dated: {dated}")
         # st.write(f"\t[{n}] : {file_name}")
         # file_name = str(source.metadata['source'])
         with open(file_name, "rb") as f:
