@@ -42,7 +42,7 @@ from langchain_openai import AzureChatOpenAI
 
 # App page icon and title in the browser, MUST be first command of the app
 img=Image.open("data/images/digital_india_logo_1.png")
-st.set_page_config(page_title="PQChatbot", page_icon=img)
+st.set_page_config(page_title="PQ AI Agent", page_icon=img)
 
 logging.basicConfig(filename='logs/app.log', format='%(asctime)s %(message)s', datefmt='%d/%m/%Y %I:%M:%S %p', encoding='utf-8', level=logging.INFO)
 
@@ -57,10 +57,10 @@ LLM_MODEL = "deepseek-r1"
 
 # Sidebar contents
 with st.sidebar:
-    st.title('🤗💬 Parliament Questions AI Chatbot')
+    st.title('🇮🇳💬 Parliament Questions AI Agent')
     st.markdown('''
     ## About
-    This Generative AI App can generate answers for parliament questions based on answers to similar questions given in past by the Ministry of Electronics and IT (MEITY), Government of India. The AI Engine is trained on both Lok Sabha and Rajya Sabha question-answer pairs pertaining to MEITY, from year 2014 onwards till last session. 
+    This Generative AI Agent App can generate answers for parliament questions based on answers to similar questions given in past by the Ministry of Electronics and IT (MEITY), Government of India. The AI Engine is trained on both Lok Sabha and Rajya Sabha question-answer pairs pertaining to MEITY, from year 2014 onwards till last session. 
     
     ''')
     add_vertical_space(1)
@@ -73,7 +73,7 @@ with st.sidebar:
     #    LLM_MODEL = "ParlGPTllama2"
     st.markdown('''
     ## Technologies
-    This Generative AI App is built using following purely open, secure and free technologies:
+    This Generative AI Agent App is built using following purely open, secure and free technologies:
     - [LLAMA4](https://www.llama.com/models/llama-4/) Large Language Model (LLM)
     - [LangChain](https://python.langchain.com/)
     ''')
@@ -244,7 +244,7 @@ async def create_persist_db(docs, embedding, dir):
 
 
 def RSJ_PQ_Chatbot():
-    st.header("Parliament Questions Chatbot 💬:flag-in:")
+    st.header("Parliament Questions AI Agent 💬🇮🇳")
     add_vertical_space(1)
     vector_db_initialized = 'false'
     pdf_folder_path = "data/PQ_MEITY"
