@@ -288,8 +288,10 @@ def RSJ_PQ_Chatbot():
         # Accept user questions/query
         # query = st.text_input(":orange[Ask questions about your data]")
         # st.write(query)
-        query = st.text_area("\n __:orange[Please enter your question here:]__\n")
-        if query:
+        with st.form(key="chat_form", clear_on_submit=True):
+            query = st.text_area("\n __:orange[Please enter your question here:]__\n")
+            submitted = st.form_submit_button("Submit")
+        if submitted and query.strip():
             # retriever = vectordb.as_retriever()
             # docs = retriever.get_relevant_documents(query=query, search_kwargs={"k": 3})
             # docs = vectordb.similarity_search(query=query, k=3)
