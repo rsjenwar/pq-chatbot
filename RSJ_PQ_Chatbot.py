@@ -288,7 +288,7 @@ def RSJ_PQ_Chatbot():
         # Accept user questions/query
         # query = st.text_input(":orange[Ask questions about your data]")
         # st.write(query)
-        with st.form(key="chat_form", clear_on_submit=True):
+        with st.form(key="chat_form", clear_on_submit=False):
             query = st.text_area("\n __:orange[Please enter your question here:]__\n")
             submitted = st.form_submit_button("Submit")
         if submitted and query.strip():
@@ -353,6 +353,9 @@ def RSJ_PQ_Chatbot():
 
                 logging.info("[RSJ | INFO] LLM: Question: %s, Answer: %s", llm_response['query'], llm_response['result'])
             else:
+                process_llm_response(st.session_state.response)
+        else:
+            if 'response' in st.session_state:
                 process_llm_response(st.session_state.response)
 
 
