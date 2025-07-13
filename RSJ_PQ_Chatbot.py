@@ -257,8 +257,7 @@ def RSJ_PQ_Chatbot():
         #st.write("rsj MD5hash_pdf_persits_dir", MD5hash_pdf_persits_dir)
         if os.path.exists(MD5hash_pdf_persits_dir):
             vectordb = Chroma(persist_directory=MD5hash_pdf_persits_dir,
-                                 embedding_function=HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2",
-    model_kwargs={'device': 'cuda'}))
+                                 embedding_function=HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2",))
             logging.info("[RSJ | INFO] Loaded Vector Store from: %s  %s", MD5hash_pdf_persits_dir, pdf_folder_path)
         else:
             pdf_loader = PyPDFDirectoryLoader(pdf_folder_path)
@@ -272,16 +271,14 @@ def RSJ_PQ_Chatbot():
             #print("[RSJ | DEBUG] All documents splitted into %d chunks with chunk size %d and chunk_overlap %d", len(all_splits), chunk_size, chunk_overlap)
             #st.write("[RSJ | DEBUG] All documents splitted into %d chunks with chunk size %d and chunk_overlap %d", len(all_splits), chunk_size, chunk_overlap)
             vectordb = create_persist_db(all_splits,
-                                         HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2",
-    model_kwargs={'device': 'cuda'}),
+                                         HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2"),
                                          MD5hash_pdf_persits_dir)
             vectordb = None
             # time.sleep(15)
             logging.debug("[RSJ | DEBUG] Created Document folder Vector Store %s %s",
                           MD5hash_pdf_persits_dir, pdf_folder_path)
             vectordb = Chroma(persist_directory=MD5hash_pdf_persits_dir,
-                                embedding_function=HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2",
-    model_kwargs={'device': 'cuda'}))
+                                embedding_function=HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2"))
             logging.debug("[RSJ | DEBUG] Loaded Vector Store from persistent directory %s", MD5hash_pdf_persits_dir)
             #st.write("[RSJ | DEBUG] Loaded Vector Store from persistent directory %s", MD5hash_pdf_persits_dir)
         # assign in session state in first go itself
