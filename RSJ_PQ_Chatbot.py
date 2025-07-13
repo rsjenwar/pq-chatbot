@@ -44,7 +44,7 @@ from langchain_openai import AzureChatOpenAI
 img=Image.open("data/images/digital_india_logo_1.png")
 st.set_page_config(page_title="PQ AI Agent", page_icon=img)
 
-logging.basicConfig(filename='logs/app.log', format='%(asctime)s %(message)s', datefmt='%d/%m/%Y %I:%M:%S %p', encoding='utf-8', level=logging.INFO)
+logging.basicConfig(filename='/mnt/chroma/logs/app.log', format='%(asctime)s %(message)s', datefmt='%d/%m/%Y %I:%M:%S %p', encoding='utf-8', level=logging.INFO)
 
 
 LLM_MODELS = {
